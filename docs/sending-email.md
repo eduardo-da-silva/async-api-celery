@@ -94,6 +94,44 @@ async def send_email(to_email: str, subject: str, body: str):
     client_mt.send(mail)
 ```
 
+??? note "Versão completa do arquivo tasks.py"
+
+    ```python title="./src/tasks.py" linenums="1" hl_lines="3 16-33"
+    from app.config import celery_app, MAILTRAP
+
+    client_mt = mt.MailtrapClient(token=MAILTRAP["token"])
+
+    @celery_app.task
+    def long_task():
+        import time
+        time.sleep(10)
+        return "Tarefa concluída"
+        celery_app = Celery(
+            "tasks",
+            broker="redis://localhost:6379/0",
+            backend="redis://localhost:6379/0"
+        )
+
+    @celery_app.task
+    def process_data_and_sending_email(data: str, to_email: str):
+        import time
+
+        time.sleep(10)
+
+        subject = "Processamento concluído"
+        body = f"O processamento dos dados foi concluído com sucesso. Dados processados: {data}"
+        asyncio.run(send_email(to_email, subject, body))
+
+    async def send_email(to_email: str, subject: str, body: str):
+        mail = mt.Mail(
+            sender=mt.Address(email="mailtrap@demomailtrap.co", name="Mailtrap Test"),
+            to=[mt.Address(email=to_email, name="User")],
+            subject=subject,
+            text=body,
+        )
+        client_mt.send(mail)
+    ```
+
 Note que a tarefa `process_data_and_sending_email` simula um processamento demorado, dormindo por 10 segundos, e depois chama a função `send_email` para enviar o email usando o Mailtrap. A função `send_email` cria um objeto `Mail` com os detalhes do email, e usa o cliente do Mailtrap para enviar o email. Note que a função `send_email` é uma função assíncrona, e por isso usamos `asyncio.run` para executá-la dentro da tarefa do Celery.
 
 Note também que usamos um endereço de email fictício como remetente (`mailtrap@demomailtrap.co`). Esse endereço é aceito pelo Mailtrap para testes, mas em uma aplicação real, você deve usar um endereço de email válido e configurado corretamente. Contudo, é necessário que o domínio do email remetente seja válido, ou seja, que o domínio possua registros DNS corretos para evitar que os emails sejam marcados como spam pelos provedores de email.
