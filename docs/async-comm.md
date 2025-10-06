@@ -33,9 +33,9 @@ Faremos um exemplo simples, usando um servidor FastAPI para ilustrar a comunica�
     pip install fastapi uvicorn
     ```
 
-O código do servidor é o seguinte:
+Crie uma pasta chamada `src` e adicione um arquivo `main.py`, com o seguinte conteúdo.:
 
-```python title="main.py" linenums="1"
+```python title="./src/main.py" linenums="1"
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -52,7 +52,7 @@ def sync_process():
 Em seguinte, iniciamos o servidor com o comando:
 
 ```bash
-uvicorn main:app --reload
+uvicorn src.main:app --reload
 ```
 
 Para testar, acesse a documentação Swagger UI em `http://localhost:8000/docs`. Clique no endpoint `/sync-process/` e depois em "Try it out" e "Execute". Você verá que a requisição demora 10 segundos para ser concluída, e durante esse tempo, o navegador fica bloqueado, ou seja, você não pode fazer mais nada até que a resposta seja recebida.

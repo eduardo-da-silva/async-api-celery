@@ -101,3 +101,4 @@ markdown_extensions:
 nav:
   - Por que Comunicação Assíncrona: async-comm.md
   - Fundamentos da Comunicação Assíncrona: fundamentals.md
+  - Exemplo básico: basic-sample.md
