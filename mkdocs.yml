@@ -102,3 +102,4 @@ nav:
   - Por que Comunicação Assíncrona: async-comm.md
   - Fundamentos da Comunicação Assíncrona: fundamentals.md
   - Exemplo básico: basic-sample.md
+  - Envio de emails em segundo plano: sending-email.md
