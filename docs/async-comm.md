@@ -1,4 +1,4 @@
-# Conceitos comunicação assíncrona
+# Por que comunicação assíncrona
 
 Na forma de tradicional de comunicação síncrona, o cliente faz uma requisição ao servidor e espera a resposta. Durante esse tempo, o cliente fica bloqueado, ou seja, não pode fazer mais nada até que a resposta seja recebida. Isso pode ser um problema em aplicações web, onde o tempo de resposta do servidor pode ser alto, e o usuário pode ficar frustrado esperando.
 

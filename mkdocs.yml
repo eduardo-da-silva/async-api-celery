@@ -99,4 +99,5 @@ markdown_extensions:
   - pymdownx.tilde
 
 nav:
-  - Comunicação Assíncrona: async-comm.md
+  - Por que Comunicação Assíncrona: async-comm.md
+  - Fundamentos da Comunicação Assíncrona: fundamentals.md
